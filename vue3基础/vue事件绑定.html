@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        {{message}}
+        <button onclick="handleClick()">点击</button>
+        <button @click="btnClick">按钮</button>
+    </div>
+
+    <script>
+        function handleClick() {
+            console.log('click');
+            app.message = 'Haha'
+        }
+        var obj = {
+            data() {
+                return {
+                    message: 'Hello Vue'
+                }
+            },
+            methods: {
+                btnClick() {
+                    console.log('按钮',this);
+                    // app.message = '按钮'
+                    this.message = '按钮'
+                }
+            }
+        }
+        var app = Vue.createApp(obj).mount('#app')
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="text" v-model="txt" @input="search">
+        <input type="text" v-model="txt" @keyup.a="test">
+        <ul>
+            <template v-for="item in search()" :key="item">
+                <li v-if="item">{{item}}</li>
+            </template>
+        </ul>
+        <div @click="clickFun">
+            <button @click="(evt)=>{console.log(evt),evt.stopPropagation()}">按钮1</button>
+            <button @click="(evt)=>{console.log(evt)}">按钮2</button>
+            <button @click.stop="(evt)=>{console.log(evt)}">按钮3</button>
+        </div>
+    </div>
+
+    <script>
+        var obj = {
+            data() {
+                return {
+                    txt: '',
+                    list: ['aaa','bbb','ccc','ddd','eee','fff','abb','acc','abc','bbc']
+                }
+            },
+            methods: {
+                search() {
+                    return this.list.filter(item => item.includes(this.txt))
+                },
+                clickFun() {
+                    console.log('冒泡事件');
+                },
+                test() {
+                    console.log('测试');
+                }
+            }
+        }
+
+        Vue.createApp(obj).mount('#app')
+    </script>
+</body>
+
+</html>
