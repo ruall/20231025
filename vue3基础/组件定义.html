@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <my-nav></my-nav>
+    <my-side></my-side>
+</div>
+
+<script>
+    const obj = {
+        data() {
+            return {
+                name: 'xxx'
+            }
+        },
+    }
+
+    const app = Vue.createApp(obj)
+    // 定义组件
+    app.component('myNav', {
+        template: `<nav>
+                        <ul>
+                            <li>首页</li>
+                            <li>个人中心</li>
+                        </ul>
+                    </nav>`
+    })
+    app.component('mySide', {
+        template: `
+          <aside>
+            侧边栏
+            <my-btn></my-btn>
+          </aside>
+        `,
+        components: {
+            'myBtn': {
+                template: `
+                    <button>按钮</button>
+                `
+            }
+        }
+    })
+    app.mount('#app')
+</script>
+
+</body>
+</html>
